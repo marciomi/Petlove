@@ -41,8 +41,7 @@ def AddCart():
 
     except Exception as e:
         print(e)
-    finally:
-        return redirect(request.referrer)
+    return redirect(request.referrer)
 
 @app.route('/carros')
 def getCart():
