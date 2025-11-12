@@ -13,6 +13,7 @@ class Addproduto(db.Model):
     cor = db.Column(db.Text, nullable=False)
     descricao = db.Column(db.Text, nullable=False)
     pub_date = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    sexo = db.Column(db.Text, nullable=False)
 
     modelo_id = db.Column(db.Integer, db.ForeignKey('modelo.id'), nullable=False)
     modelo = db.relationship('Modelo', backref=db.backref('modelos', lazy=True))

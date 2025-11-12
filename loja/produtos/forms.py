@@ -9,7 +9,7 @@ class Addprodutos(Form):
     estoque = IntegerField('Estoque :',[validators.DataRequired()])
     descricao = StringField('Descrição :',[validators.DataRequired()])
     cor = TextAreaField('Cor :',[validators.DataRequired()])
-     
+    sexo = StringField('Descrição :',[validators.DataRequired()]) 
     
     imagem_1 = FileField('Imagem 1 :', validators=[FileAllowed(['jpg','png','gif','jpeg','bmp'])])
     imagem_2 = FileField('Imagem 2 :', validators=[FileAllowed(['jpg','png','gif','jpeg','bmp'])])
