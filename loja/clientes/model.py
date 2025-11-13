@@ -26,16 +26,28 @@ def user_carregar(user_id):
 class Cadastrar(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(50), unique = False)
+    idade = db.Column(db.Integer, nullable=False)
+    profissao = db.Column(db.String(50), unique = False)
+    telefone = db.Column(db.String(50), unique = False)
+    address = db.Column(db.String(50) ,unique = False)
+    bairro = db.Column(db.String(50) ,unique = False)
+    city = db.Column(db.String(50), unique = False)
+    tipo_residencia = db.Column(db.String(50), unique = False)
+    possui_outros_animmais = db.Column(db.String(50), unique = False)
+    preferencia_especie = db.Column(db.String(50), unique = False)
+    preferencia_porte = db.Column(db.String(50), unique = False)
+    preferencia_comportamento = db.Column(db.String(50), unique = False)
+    data_criado = db.Column(db.DateTime, nullable=False,default=datetime.now)
+    animais_adotados = db.Column(db.Integer)
     username = db.Column(db.String(50), unique = True)
     email = db.Column(db.String(50), unique = True)
     password = db.Column(db.String(50), unique = False)    
     state = db.Column(db.String(50), unique = False)
-    city = db.Column(db.String(50), unique = False)
     contact = db.Column(db.String(50) ,unique = False)
     address = db.Column(db.String(50) ,unique = False)
     zipcode = db.Column(db.String(50) ,unique = False)
     profile = db.Column(db.String(50), unique = False, default='profile.jpg')
-    data_criado = db.Column(db.DateTime, nullable=False,default=datetime.now)
+    
     
     def __repr__(self):
         return '<Cadastrar %r>' % self.name
