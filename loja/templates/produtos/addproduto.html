@@ -8,41 +8,106 @@
     <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8 p-2">
-        <h2 class="text-center bg-success p-2">Cadastrar Produtos</h2>
+        <h2 class="text-center bg-success p-2">Cadastrar Animais</h2>
 
         {% from "_formhelpers.html" import render_field %}
         <form action="" method="POST" enctype="multipart/form-data">
 
-            {{ render_field(form.nome, class="form-control", placeholder="Nome do produto")}}
-            {{ render_field(form.preco, class="form-control", placeholder="Preço do produto")}}
-            {{ render_field(form.desconto, class="form-control", placeholder="Desconto do produto")}}
-            {{ render_field(form.estoque, class="form-control", placeholder="Quantidade do produto em estoque")}}
-
-
-            <label for="modelo">Adicionar um Modelo</label>
+            {{ render_field(form.nome, class="form-control")}}
+            
+            <label for="modelo"><strong>Espécie :</strong></label>
             <select name="modelo" id="modelo" class="form-control" required>
-                <option value="">Selecione um modelo</option>
+                <option value=""></option>
                 {% for modelo in modelos %}
                 <option value="{{modelo.id}}">{{modelo.name}}</option>
                 {% endfor %}
             </select>
 
-            <label for="tema">Adicionar um Tema</label>
+            <label for="tema"><strong>Raça :</strong></label>
             <select name="tema" id="tema" class="form-control" required>
-                <option value="">Selecione um tema</option>
+                <option value=""></option>
                 {% for tema in temas %}
                 <option value="{{tema.id}}">{{tema.name}}</option>
                 {% endfor %}
             </select>
+            
+            <label for="sexo"><strong>Sexo :</strong></label>
+            <select name="sexo" id="sexo" class="form-control" required>
+                <option value=""></option>
+                <option value="Macho">Macho</option>
+                <option value="Fêmea">Fêmea</option>
+            </select>
 
-            {{ render_field(form.cor, class="form-control", placeholder="Cor do produto")}}
-            {{ render_field(form.descricao, class="form-control", placeholder="Descrição do produto",rows="10")}}
+            {{ render_field(form.idade, class="form-control", placeholder="Idade em anos")}}
+            
+            <label for="porte"><strong>Porte :</strong></label>
+            <select name="porte" id="porte" class="form-control" required>
+                <option value=""></option>
+                <option value="Pequeno">Pequeno</option>
+                <option value="Médio">Médio</option>
+                <option value="Grande">Grande</option>
+            </select>
+
+            <label for="comportamento"><strong>Comportamento :</strong></label>
+            <select name="comportamento" id="comportamento" class="form-control" required>
+                <option value=""></option>
+                <option value="Brincalhão">Brincalhão</option>
+                <option value="Sociável">Sociável</option>
+                <option value="Tímido">Tímido</option>
+                <option value="Medroso">Medroso</option>
+                <option value="Agressivo">Agressivo</option>
+            </select>
+
+            <label for="compatibilidade"><strong>Compatibilidade :</strong></label>
+            <select name="compatibilidade" id="compatibilidade" class="form-control" required>
+                <option value=""></option>
+                <option value="Compatível com crianças">Compatível com crianças</option>
+                <option value="Compatível com famílias">Compatível com famílias</option>
+                <option value="Requer ambiente tranquilo">Requer ambiente tranquilo</option>
+                <option value="Compatível com adultos calmos">Compatível com adultos calmos</option>
+                <option value="Necessita treinamento">Necessita treinamento</option>
+            </select>
+            
+            <label for="historico_resgate"><strong>Histórico de resgate :</strong></label>
+            <select name="historico_resgate" id="historico_resgate" class="form-control" required>
+                <option value=""></option>
+                <option value="Abandono">Abandono</option>
+                <option value="Resgate urbano">Resgate urbano</option>
+                <option value="Transferência de abrigo">Transferência de abrigo</option>
+                <option value="Maus-tratos">Maus-tratos</option>
+            </select>
+
+            <label for="local_do_abrigo"><strong>Local do abrigo :</strong></label>
+            <select name="local_do_abrigo" id="local_do_abrigo" class="form-control" required>
+                <option value=""></option>
+                <option value="Campinas">Campinas</option>
+                <option value="Indaiatuba">Indaiatuba</option>
+                <option value="Valinhos">Valinhos</option>
+                <option value="Sumaré">Sumaré</option>
+                <option value="Hortolandia">Hortolândia</option>
+            </select>
+
+            
+            {{ render_field(form.data_entrada, class="form-control", placeholder="(dd/mm/aa)")}}
+            
+            <label for="status"><strong>Status :</strong></label>
+            <select name="status" id="status" class="form-control" required>
+                <option value=""></option>
+                <option value="Disponível">Disponível</option>
+                <option value="Adotado">Adotado</option>
+                <option value="Falecido">Falecido</option>
+            </select>            
+            
+            {{ render_field(form.data_adocao, class="form-control", placeholder="(dd/mm/aa)")}}
+            {{ render_field(form.data_falecimento, class="form-control", placeholder="(dd/mm/aa)")}}
+            {{ render_field(form.descricao, class="form-control", rows=5)}}
+           
 
             <div class="cointainer">
                 <div class="row">
-                    <div class="col-md-10">{{ render_field(form.imagem_1, class="form-control", required=true)}}</div>
-                    <div class="col-md-10">{{ render_field(form.imagem_2, class="form-control", required=true)}}</div>
-                    <div class="col-md-10">{{ render_field(form.imagem_3, class="form-control", required=true)}}</div>
+                    <div class="col-md-10">{{ render_field(form.imagem_1, class="form-control", required=false)}}</div>
+                    <div class="col-md-10">{{ render_field(form.imagem_2, class="form-control", required=false)}}</div>
+                    <div class="col-md-10">{{ render_field(form.imagem_3, class="form-control", required=false)}}</div>
                 </div>
             </div>
             <button type="submit" class="btn btn-outline-info mt-4">Cadastrar</button>

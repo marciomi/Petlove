@@ -3,6 +3,8 @@ from .forms import Addprodutos
 from loja import db, app, photos
 from .models import Modelo, Tema, Addproduto
 import secrets, os
+from flask_uploads import UploadNotAllowed
+from datetime import datetime
 
 def modelos():
     modelos = modelos = Modelo.query.join(Addproduto,(Modelo.id == Addproduto.modelo_id)).all()
@@ -88,18 +90,71 @@ def addproduto():
     form = Addprodutos(request.form)
     if request.method=="POST":
         nome = form.nome.data
+        sexo = form.sexo.data
+        idade = form.idade.data
+        porte = form.porte.data
+        comportamento = form.comportamento.data
+        compatibilidade = form.compatibilidade.data
+        historico_resgate = form.historico_resgate.data
+        local_do_abrigo = form.local_do_abrigo.data
+
+        str_data_entrada = request.form.get('data_entrada')
+        if str_data_entrada:
+            data_entrada = datetime.strptime(str_data_entrada, '%d/%m/%y').date()
+        else:
+            data_entrada = None  
+
+        status = form.status.data
+
+        str_data_adocao = request.form.get('data_adocao')
+        if str_data_adocao:
+            data_adocao = datetime.strptime(str_data_adocao, '%d/%m/%y').date()
+        else:
+            data_adocao = None
+
+        str_data_falecimento = request.form.get('data_falecimento')
+        if str_data_falecimento:
+            data_falecimento = datetime.strptime(str_data_falecimento, '%d/%m/%y').date()
+        else:
+            data_falecimento = None
+
+        descricao = form.descricao.data
         preco = form.preco.data
         desconto = form.desconto.data
         estoque = form.estoque.data
         cor = form.cor.data
-        descricao = form.descricao.data
         modelo = request.form.get('modelo')
         tema = request.form.get('tema')
-        imagem_1 = photos.save(request.files.get('imagem_1'),name=secrets.token_hex(10)+".")
-        imagem_2 = photos.save(request.files.get('imagem_2'),name=secrets.token_hex(10)+".")
-        imagem_3 = photos.save(request.files.get('imagem_3'),name=secrets.token_hex(10)+".")
+        
+        imagem_1 = ''
+        imagem_1_file = request.files.get('imagem_1')
+        if imagem_1_file and imagem_1_file.filename != '':
+            try:
+                imagem_1 = photos.save(imagem_1_file, name=secrets.token_hex(10) + '.')
+            except UploadNotAllowed:
+                imagem_1 = ''
+        
+        imagem_2 = ''
+        imagem_2_file = request.files.get('imagem_2')
+        if imagem_2_file and imagem_2_file.filename != '':
+            try:
+                imagem_2 = photos.save(imagem_2_file, name=secrets.token_hex(10) + '.')
+            except UploadNotAllowed:
+                imagem_2 = ''
+        else:
+            imagem_2 = ''
+       
+        imagem_3 = ''
+        imagem_3_file = request.files.get('imagem_3')
+        if imagem_3_file and imagem_3_file.filename != '':
+            try:
+                imagem_3 = photos.save(imagem_3_file, name=secrets.token_hex(10) + '.')
+            except UploadNotAllowed:
+                imagem_3 = ''
+        else:
+            imagem_3 = ''
 
-        addpro = Addproduto(nome=nome, preco=preco, desconto=desconto, estoque=estoque, cor=cor, descricao=descricao, modelo_id=modelo, tema_id=tema, imagem_1=imagem_1, imagem_2=imagem_2, imagem_3=imagem_3)
+        addpro = Addproduto(data_adocao=data_adocao, data_falecimento=data_falecimento, data_entrada=data_entrada, local_do_abrigo=local_do_abrigo, status=status, sexo=sexo, idade=idade, porte=porte, comportamento=comportamento, compatibilidade=compatibilidade, historico_resgate=historico_resgate,   nome=nome, preco=preco, desconto=desconto, estoque=estoque, cor=cor, descricao=descricao, modelo_id=modelo, tema_id=tema, imagem_1=imagem_1, imagem_2=imagem_2, imagem_3=imagem_3)
         db.session.add(addpro)
         flash(f'Produto {nome} foi cadastrado com sucesso', 'success')
         db.session.commit()

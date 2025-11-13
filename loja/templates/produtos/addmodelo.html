@@ -8,7 +8,7 @@
         <div class="col-md-6">
             {% include "_messages.html" %}
             {% if modelo %}
-            <h2 class="text-center mt-5"> Cadastrar Modelos </h2>
+            <h2 class="text-center mt-5"> Cadastrar Espécie </h2>
             <form action="" method="POST">
                 <input type="text" name="modelo" class="form-control">
                 <input type="submit" value="Cadastrar" class="btn btn-success mt-2">
@@ -16,7 +16,7 @@
             </form>
             <a href="{{url_for('modelo')}}" class="btn btn-danger"style="margin-top: -65px; margin-left: 100px;">Cancelar</a>
             {% else %}
-            <h2 class="text-center mt-5">Cadastrar Temas</h2>
+            <h2 class="text-center mt-5">Cadastrar Raça</h2>
             <form action="" method="POST">
                 <input type="text" name="tema" class="form-control">
                 <input type="submit" value="Cadastrar" class="btn btn-success mt-2">

@@ -8,17 +8,15 @@
     <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8 p-2">
-        <h2 class="text-center bg-success p-2">Atualizar Produtos</h2>
+        <h2 class="text-center bg-success p-2">Atualizar Animais</h2>
 
         {% from "_formhelpers.html" import render_field %}
         <form action="" method="POST" enctype="multipart/form-data">
 
-            {{ render_field(form.nome, class="form-control", placeholder="Nome do produto")}}
-            {{ render_field(form.preco, class="form-control", placeholder="Preço do produto")}}
-            {{ render_field(form.desconto, class="form-control", placeholder="Desconto do produto")}}
-            {{ render_field(form.estoque, class="form-control", placeholder="Quantidade do produto em estoque")}}
+            {{ render_field(form.nome, class="form-control")}}
+            
 
-            <label for="modelo">Modelo:</label>
+            <label for="modelo"><strong>Espécie :</strong></label>
             <select name="modelo" id="modelo" class="form-control" required>
                 <option value="{{produto.modelo_id}}">{{produto.modelo.name}}</option>
                 {% for modelo in modelos %}
@@ -26,7 +24,7 @@
                 {% endfor %}
             </select>
 
-            <label for="tema">Tema:</label>
+            <label for="tema"><strong>Raça :</strong></label>
             <select name="tema" id="tema" class="form-control" required>
                 <option value="{{produto.tema_id}}">{{produto.tema.name}}</option>
                 {% for tema in temas %}
@@ -34,7 +32,21 @@
                 {% endfor %}
             </select>
 
-            {{ render_field(form.cor, class="form-control", placeholder="Cor do produto")}}
+            <label for="sexo"><strong>Sexo :</strong></label>
+            <select name="sexo" id="sexo" class="form-control" required>
+                <option value="Macho" {% if produto.sexo == "Macho" %}selected{% endif %}>Macho</option>
+                <option value="Fêmea" {% if produto.sexo == "Fêmea" %}selected{% endif %}>Fêmea</option>
+            </select>
+
+            {{ render_field(form.idade, class="form-control")}}
+            
+            <label for="porte"><strong>Porte :</strong></label>
+            <select name="porte" id="porte" class="form-control" required>
+                <option value="Pequeno" {% if produto.sexo == "Pequeno" %}selected{% endif %}>Pequeno</option>
+                <option value="Médio" {% if produto.sexo == "Médio" %}selected{% endif %}>Médio</option>
+                <option value="Grande" {% if produto.sexo == "Grande" %}selected{% endif %}>Grande</option>
+            </select>
+
             {{ render_field(form.descricao, class="form-control", placeholder="Descrição do produto",rows="10")}}
             <div class="card">
                 <img src="{{url_for('static', filename='imagens/' + produto.imagem_1)}}" width="150" height="80">

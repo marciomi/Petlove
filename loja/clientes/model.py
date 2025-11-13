@@ -26,9 +26,9 @@ def user_carregar(user_id):
 class Cadastrar(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(50), unique = False)
-    idade = db.Column(db.Integer, nullable=False)
+    idade = db.Column(db.Integer, nullable=True)
     profissao = db.Column(db.String(50), unique = False)
-    telefone = db.Column(db.String(50), unique = False)
+    contact = db.Column(db.String(50) ,unique = False)
     address = db.Column(db.String(50) ,unique = False)
     bairro = db.Column(db.String(50) ,unique = False)
     city = db.Column(db.String(50), unique = False)
@@ -43,10 +43,10 @@ class Cadastrar(db.Model, UserMixin):
     email = db.Column(db.String(50), unique = True)
     password = db.Column(db.String(50), unique = False)    
     state = db.Column(db.String(50), unique = False)
-    contact = db.Column(db.String(50) ,unique = False)
     address = db.Column(db.String(50) ,unique = False)
     zipcode = db.Column(db.String(50) ,unique = False)
     profile = db.Column(db.String(50), unique = False, default='profile.jpg')
+
     
     
     def __repr__(self):
